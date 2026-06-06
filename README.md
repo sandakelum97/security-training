@@ -81,7 +81,7 @@ Steps:
 
 Clone the Repository:
 
-git clone [https://github.com/sandakelum97/chesmi-security-training.git](https://github.com/sandakelum97/chesmi-security-training.git)
+git clone [https://github.com/sandakelum97/security-training.git](https://github.com/sandakelum97/security-training.git)
 cd chesmi-security-training
 
 Install Backend Dependencies:
