@@ -252,7 +252,11 @@ admin.delete('/users/:id', wrap(async (req, res) => {
 }));
 
 api.use('/admin', admin);
-api.get('/health', (req, res) => res.json({ ok: true }));
+// Checks the database too; reports only a short error code (never the message or connection details).
+api.get('/health', async (req, res) => {
+  try { await q('SELECT 1'); res.json({ ok: true, db: 'ok' }); }
+  catch (err) { console.error('health db check failed:', err.code || err.name); res.status(503).json({ ok: false, db: String(err.code || err.name || 'error').slice(0, 32) }); }
+});
 api.use((req, res) => res.status(404).json({ error: 'Not found.' }));
 
 // Never leak stack traces or SQL errors to clients.

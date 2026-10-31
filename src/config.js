@@ -1,8 +1,11 @@
 // Central config. Fails fast on missing/weak secrets so a misconfigured deploy never starts.
 const env = process.env;
 
+// Values copied from .env files often keep their quotes ("..."), which breaks URLs and secrets.
+const clean = v => (v ?? '').trim().replace(/^(['"])(.*)\1$/s, '$2').trim();
+
 function required(name) {
-  const v = env[name];
+  const v = clean(env[name]);
   if (!v) throw new Error(`Missing required env var ${name}`);
   return v;
 }
