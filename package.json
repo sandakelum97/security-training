@@ -4,21 +4,29 @@
   "description": "Open-source, animated cyber security, AI security and AI literacy training platform.",
   "type": "module",
   "license": "MIT",
-  "engines": { "node": ">=20" },
+  "engines": {
+    "node": ">=20"
+  },
   "scripts": {
     "start": "node server.js",
-    "dev": "node --watch --env-file-if-exists=.env server.js",
-    "db:setup": "node --env-file-if-exists=.env scripts/db-setup.js",
-    "make-admin": "node --env-file-if-exists=.env scripts/make-admin.js",
+    "dev": "node --watch --env-file-if-exists=.env --env-file-if-exists=.env.local server.js",
+    "db:setup": "node --env-file-if-exists=.env --env-file-if-exists=.env.local scripts/db-setup.js",
+    "make-admin": "node --env-file-if-exists=.env --env-file-if-exists=.env.local scripts/make-admin.js",
     "validate": "node scripts/validate-content.js",
-    "test": "node --env-file-if-exists=.env --test test/*.test.js"
+    "test": "node --env-file-if-exists=.env --env-file-if-exists=.env.local --test test/*.test.js",
+    "build": "npm run validate"
   },
   "dependencies": {
+    "@vercel/functions": "^3.10.5",
     "express": "^5.1.0",
     "express-rate-limit": "^8.2.1",
     "helmet": "^8.1.0",
     "jose": "^6.1.0",
     "pg": "^8.16.3",
     "zod": "^4.1.12"
+  },
+  "devDependencies": {
+    "@neon/config": "^1.10.0",
+    "@neon/env": "^1.6.8"
   }
 }
