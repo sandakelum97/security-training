@@ -29,6 +29,7 @@ Every module lists its sources (NIST, CISA, FBI IC3, UK NCSC, OWASP, MITRE, ICO,
 - Progress tracking, an opt-in leaderboard, and printable certificates anyone can verify by link.
 - Admin dashboard: completion stats per module, user search, learner history, role changes and account removal.
 - Restrict sign-up to your email domain, or close registration entirely.
+- Password reset: self-service by email (optional, via [Resend](https://resend.com): set `RESEND_API_KEY`, `MAIL_FROM`, `APP_ORIGIN`), or a one-time link an admin creates from the Admin page. Signed-in users can change their password under My progress.
 
 ## Quick start (local)
 Requirements: Node.js 20+ and any PostgreSQL 13+.

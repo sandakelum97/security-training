@@ -12,6 +12,7 @@ Please report privately through GitHub's **Security → Report a vulnerability**
 | XSS | Strict CSP (`script-src 'self'`, no inline scripts or styles, `frame-ancestors 'none'`). The frontend never uses `innerHTML`: all text is set with `textContent`. Names are restricted to letters, spaces, `.`, `'` and `-`. |
 | Passwords | scrypt (N=2^15, r=8, p=3, an OWASP-recommended setting that uses 32 MiB per hash) with a random salt. Follows NIST SP 800-63B-4: at least 15 characters, no composition rules, a breached-password check (HIBP k-anonymity, optional), and no name or email inside the password. |
 | Brute force | Per-IP rate limits (20 auth requests per 15 min, 600 API requests per 15 min). Accounts lock for 15 min after 10 failed sign-ins. Unknown emails get the same response and timing as wrong passwords. |
+| Password reset | One-time tokens (256-bit, 30-minute expiry), stored only as SHA-256 hashes, deleted on use. Using one revokes every session. "Forgot password" answers identically for any email, and emails go out only when `APP_ORIGIN` is set, so the Host header can't poison links. Admins can issue a link when email isn't configured. Changing a password needs the current one and signs out other devices. |
 | Input | Zod validation on every body and parameter. JSON bodies are capped at 10 kB. Every SQL query is parameterised. |
 | Database | TLS with certificate verification is on by default. Only `PGSSL=disable` turns it off, for local development. |
 | Errors | Stack traces and SQL errors are never returned to clients. |

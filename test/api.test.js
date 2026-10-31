@@ -4,6 +4,7 @@ import assert from 'node:assert/strict';
 
 process.env.SESSION_SECRET ||= 'test-secret-'.padEnd(40, 'x');
 process.env.HIBP_CHECK = 'false';
+process.env.AUTH_RATE_LIMIT = '1000';
 const { app } = await import('../src/app.js');
 const { pool } = await import('../src/db.js');
 const { modules } = await import('../src/content.js');
@@ -120,4 +121,49 @@ test('attempts started on an older module version cannot be answered or finished
   const fin = await call(`/attempts/${start.body.attemptId}/finish`, { method: 'POST', cookie });
   assert.equal(fin.status, 409);
   assert.equal((await pool.query('SELECT 1 FROM attempts WHERE id = $1', [start.body.attemptId])).rowCount, 0, 'stale attempt discarded');
+});
+
+test('password reset: admin link works once, revokes sessions, and the new password signs in', async () => {
+  const admin = await register('resetadmin@test.invalid', 'Reset Admin');
+  await pool.query("UPDATE users SET role = 'admin' WHERE email = 'resetadmin@test.invalid'");
+  const victimCookie = await register('resetme@test.invalid', 'Reset Me');
+  const id = (await call('/admin/users?search=resetme@test.invalid', { cookie: admin })).body.users[0].id;
+  const { body } = await call(`/admin/users/${id}/reset-link`, { method: 'POST', cookie: admin });
+  const token = body.link.split('/reset/')[1];
+  const stored = (await pool.query('SELECT token_hash FROM password_resets WHERE user_id = $1', [id])).rows[0].token_hash;
+  assert.notEqual(stored, token, 'only a hash is stored');
+  assert.equal((await call('/auth/reset', { method: 'POST', body: { token, password: 'short' } })).status, 400);
+  const newPw = 'lantern quarry violet meadow';
+  assert.equal((await call('/auth/reset', { method: 'POST', body: { token, password: newPw } })).status, 200, 'token still valid after a rejected password');
+  assert.equal((await call('/auth/reset', { method: 'POST', body: { token, password: newPw + ' x' } })).status, 400, 'single use');
+  assert.equal((await call('/me', { cookie: victimCookie })).status, 401, 'old sessions revoked');
+  assert.equal((await call('/auth/login', { method: 'POST', body: { email: 'resetme@test.invalid', password: pw } })).status, 401);
+  assert.equal((await call('/auth/login', { method: 'POST', body: { email: 'resetme@test.invalid', password: newPw } })).status, 200);
+});
+
+test('password reset: expired or unknown tokens fail; non-admins cannot create links', async () => {
+  const user = await register('expire@test.invalid', 'Expire Me');
+  const me = (await call('/me', { cookie: user })).body;
+  assert.equal((await call(`/admin/users/${me.id}/reset-link`, { method: 'POST', cookie: user })).status, 403);
+  const { createResetToken } = await import('../src/reset.js');
+  const token = await createResetToken(me.id);
+  await pool.query("UPDATE password_resets SET expires_at = now() - interval '1 minute' WHERE user_id = $1", [me.id]);
+  assert.equal((await call('/auth/reset', { method: 'POST', body: { token, password: 'lantern quarry violet meadow' } })).status, 400);
+  assert.equal((await call('/auth/reset', { method: 'POST', body: { token: 'x'.repeat(43), password: 'lantern quarry violet meadow' } })).status, 400);
+});
+
+test('forgot password gives the same answer for known and unknown emails', async () => {
+  await register('forgot@test.invalid');
+  const known = await call('/auth/forgot', { method: 'POST', body: { email: 'forgot@test.invalid' } });
+  const unknown = await call('/auth/forgot', { method: 'POST', body: { email: 'nobody@test.invalid' } });
+  assert.deepEqual(known.body, unknown.body);
+});
+
+test('change password needs the current password and keeps only this session', async () => {
+  const c = await register('change@test.invalid', 'Change Me');
+  assert.equal((await call('/me/password', { method: 'POST', cookie: c, body: { current: 'wrong-password', password: 'lantern quarry violet meadow' } })).status, 400);
+  const ok = await call('/me/password', { method: 'POST', cookie: c, body: { current: pw, password: 'lantern quarry violet meadow' } });
+  assert.equal(ok.status, 200);
+  assert.equal((await call('/me', { cookie: c })).status, 401, 'old cookie revoked');
+  assert.equal((await call('/me', { cookie: ok.cookie })).status, 200, 'new cookie works');
 });

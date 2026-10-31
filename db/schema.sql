@@ -31,3 +31,12 @@ CREATE TABLE IF NOT EXISTS attempts (
 
 CREATE INDEX IF NOT EXISTS attempts_user_idx   ON attempts (user_id, started_at DESC);
 CREATE INDEX IF NOT EXISTS attempts_passed_idx ON attempts (module_slug) WHERE passed;
+
+-- One-time password reset tokens. Only a SHA-256 hash of the token is stored.
+CREATE TABLE IF NOT EXISTS password_resets (
+  token_hash text PRIMARY KEY,
+  user_id    uuid NOT NULL REFERENCES users(id) ON DELETE CASCADE,
+  expires_at timestamptz NOT NULL,
+  created_at timestamptz NOT NULL DEFAULT now()
+);
+CREATE INDEX IF NOT EXISTS password_resets_user_idx ON password_resets (user_id);
