@@ -23,10 +23,15 @@
     "helmet": "^8.1.0",
     "jose": "^6.1.0",
     "pg": "^8.16.3",
-    "zod": "^4.1.12"
+    "zod": "^4.6.7"
   },
   "devDependencies": {
     "@neon/config": "^1.10.0",
     "@neon/env": "^1.6.8"
+  },
+  "overrides": {
+    "@vercel/cli-config": {
+      "zod": "$zod"
+    }
   }
 }
