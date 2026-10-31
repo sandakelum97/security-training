@@ -143,27 +143,39 @@ api.post('/modules/:slug/attempts', requireUser, wrap(async (req, res) => {
   });
 }));
 
+// An attempt is only valid against the module version it started on. If content is updated mid-attempt,
+// the learner must restart, so feedback and scores always match the questions they were shown.
+const STALE = 'This module was just updated. Please start it again.';
+const isCurrent = a => modules.get(a.module_slug)?.version === a.module_version;
+
 // Each question can be answered exactly once; the reveal comes only after the answer is locked in.
 api.post('/attempts/:id/answer', requireUser, wrap(async (req, res) => {
   const id = parse(Uuid, req.params.id);
   const { qid, choice } = parse(z.object({ qid: z.string().max(40), choice: z.number().int().min(0).max(9) }), req.body);
+  const found = (await q('SELECT module_slug, module_version FROM attempts WHERE id = $1 AND user_id = $2', [id, req.user.id])).rows[0];
+  if (found && !isCurrent(found)) return res.status(409).json({ error: STALE, stale: true });
   const { rows } = await q(`UPDATE attempts SET answers = answers || jsonb_build_object($3::text, $4::int)
     WHERE id = $1 AND user_id = $2 AND completed_at IS NULL AND started_at > now() - interval '3 hours'
-      AND $3 = ANY(question_ids) AND NOT (answers ? $3) RETURNING module_slug`, [id, req.user.id, qid, choice]);
+      AND module_version = $5 AND $3 = ANY(question_ids) AND NOT (answers ? $3) RETURNING module_slug`,
+    [id, req.user.id, qid, choice, found?.module_version ?? -1]);
   if (!rows[0]) return res.status(409).json({ error: 'This question was already answered or the attempt has expired.' });
-  const question = modules.get(rows[0].module_slug)?.byId.get(qid);
+  const question = modules.get(rows[0].module_slug).byId.get(qid);
   res.json({ correct: question?.answer === choice, answer: question?.answer, why: question?.why });
 }));
 
 api.post('/attempts/:id/finish', requireUser, wrap(async (req, res) => {
   const id = parse(Uuid, req.params.id);
-  const { rows } = await q(`SELECT module_slug, question_ids, answers FROM attempts
+  const { rows } = await q(`SELECT module_slug, module_version, question_ids, answers FROM attempts
     WHERE id = $1 AND user_id = $2 AND completed_at IS NULL`, [id, req.user.id]);
   const a = rows[0];
   if (!a) return res.status(404).json({ error: 'Attempt not found or already finished.' });
+  if (!isCurrent(a)) {
+    await q('DELETE FROM attempts WHERE id = $1 AND user_id = $2 AND completed_at IS NULL', [id, req.user.id]);
+    return res.status(409).json({ error: STALE, stale: true });
+  }
   const m = modules.get(a.module_slug);
-  const score = a.question_ids.filter(qid => m?.byId.get(qid)?.answer === a.answers[qid]).length;
-  const passed = score / a.question_ids.length >= (m?.passMark ?? 1);
+  const score = a.question_ids.filter(qid => m.byId.get(qid)?.answer === a.answers[qid]).length;
+  const passed = score / a.question_ids.length >= m.passMark;
   const upd = await q(`UPDATE attempts SET score = $3, passed = $4, completed_at = now()
     WHERE id = $1 AND user_id = $2 AND completed_at IS NULL RETURNING id`, [id, req.user.id, score, passed]);
   if (!upd.rows[0]) return res.status(409).json({ error: 'Attempt already finished.' });

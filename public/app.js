@@ -35,6 +35,7 @@ async function api(path, { method = 'GET', body } = {}) {
   });
   const data = await res.json().catch(() => ({}));
   if (res.status === 401 && path !== '/me' && !path.startsWith('/auth')) { state.me = null; go('#/login'); }
+  if (data.stale) { toast(data.error); setTimeout(render, 1500); }
   if (!res.ok) throw Object.assign(new Error(data.error || 'Something went wrong.'), { status: res.status });
   return data;
 }
