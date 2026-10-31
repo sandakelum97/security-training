@@ -39,9 +39,9 @@
       "title": "Law: the EU AI Act",
       "visual": "🇪🇺",
       "points": [
-        "The EU AI Act entered into force on 1 August 2024 and uses a risk-based approach: unacceptable, high, limited and minimal risk.",
+        "The EU AI Act entered into force on 1 August 2024 and uses a risk-based approach: unacceptable, high, limited (transparency) and minimal risk.",
         "Bans on certain prohibited practices, and an AI literacy duty for providers and deployers, have applied since 2 February 2025.",
-        "Obligations for general-purpose AI model providers have applied since 2 August 2025. Other obligations phase in later, so check current official guidance."
+        "Rules for general-purpose AI model providers have applied since 2 August 2025, and most other rules since 2 August 2026. A 2026 amendment moved many high-risk rules to December 2027 and August 2028."
       ],
       "tip": "Even outside the EU, these ideas (transparency, human oversight, risk assessment) are becoming normal expectations."
     }

@@ -23,7 +23,7 @@
       "visual": "💸",
       "points": [
         "Criminals pose as a supplier or executive and ask to change bank details or make an urgent payment.",
-        "The FBI's 2024 report recorded about $2.8 billion in reported BEC losses in the US alone.",
+        "The FBI's 2024 Internet Crime Report recorded about $2.8 billion in BEC losses reported to it in a single year.",
         "Defence: verify any payment or bank-detail change by calling a number you already have on file, never one in the request."
       ],
       "tip": "A two-minute phone call can stop a six-figure loss."
@@ -131,6 +131,6 @@
   "sources": [
     { "title": "FBI IC3 – 2024 Internet Crime Report", "url": "https://www.ic3.gov/AnnualReport/Reports/2024_IC3Report.pdf" },
     { "title": "CISA – Avoiding Social Engineering and Phishing Attacks", "url": "https://www.cisa.gov/news-events/news/avoiding-social-engineering-and-phishing-attacks" },
-    { "title": "UK NCSC – Business email compromise: defending your organisation", "url": "https://www.ncsc.gov.uk/guidance/business-email-compromise-defending-your-organisation" }
+    { "title": "UK NCSC & NCA – Business email compromise: dealing with targeted phishing emails", "url": "https://www.ncsc.gov.uk/files/Business-email-compromise-payment-diversion-fraud.pdf" }
   ]
 }

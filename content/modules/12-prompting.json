@@ -105,8 +105,8 @@
     }
   ],
   "sources": [
-    { "title": "Anthropic – Prompt engineering overview", "url": "https://docs.claude.com/en/docs/build-with-claude/prompt-engineering/overview" },
-    { "title": "OpenAI – Prompt engineering guide", "url": "https://platform.openai.com/docs/guides/prompt-engineering" },
+    { "title": "Anthropic – Prompt engineering overview", "url": "https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/overview" },
+    { "title": "OpenAI – Prompt engineering guide", "url": "https://developers.openai.com/api/docs/guides/prompt-engineering" },
     { "title": "NIST AI 600-1 – Generative AI Profile", "url": "https://nvlpubs.nist.gov/nistpubs/ai/NIST.AI.600-1.pdf" }
   ]
 }

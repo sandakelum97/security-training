@@ -42,7 +42,7 @@
       "visual": "🧩",
       "points": [
         "Review AI-generated code like a stranger's pull request: check for security flaws, secrets and licence issues.",
-        "AI models can suggest packages that don't exist. Attackers register those names with malware, so verify every dependency.",
+        "AI models can suggest packages that don't exist. Attackers can register those names and fill them with malware, so verify every dependency.",
         "Give AI agents the least access they need, and require human approval for actions like sending, paying or deleting."
       ]
     }

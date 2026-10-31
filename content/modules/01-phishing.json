@@ -71,7 +71,7 @@
       "q": "In the address https://login.mybank.com.secure-check.net/verify, which site would you actually be visiting?",
       "options": ["mybank.com", "login.mybank.com", "secure-check.net", "verify"],
       "answer": 2,
-      "why": "The registered domain is the part just before the first single slash: secure-check.net. Everything to its left is just a subdomain the attacker controls."
+      "why": "The web address ends at the first single slash. Reading right to left from there, the real (registered) domain is secure-check.net. Everything to its left is just a subdomain the attacker controls."
     },
     {
       "id": "ph-4", "type": "email",

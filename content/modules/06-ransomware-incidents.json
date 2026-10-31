@@ -119,7 +119,7 @@
   ],
   "sources": [
     { "title": "CISA – #StopRansomware Guide", "url": "https://www.cisa.gov/stopransomware/ransomware-guide" },
-    { "title": "CISA – StopRansomware", "url": "https://www.cisa.gov/stopransomware" },
+    { "title": "FBI & CISA – #StopRansomware advisory: RansomHub (Aug 2024), on not paying ransoms", "url": "https://www.ic3.gov/CSA/2024/240829.pdf" },
     { "title": "UK NCSC – Mitigating malware and ransomware attacks", "url": "https://www.ncsc.gov.uk/guidance/mitigating-malware-and-ransomware-attacks" }
   ]
 }
