@@ -1,0 +1,124 @@
+{
+  "slug": "devices-browsing",
+  "version": 1,
+  "track": "cyber",
+  "order": 4,
+  "title": "Secure Devices & Safe Browsing",
+  "icon": "💻",
+  "summary": "Updates, downloads, Wi-Fi and the everyday habits that keep devices clean.",
+  "level": "Beginner",
+  "minutes": 6,
+  "lessons": [
+    {
+      "title": "Update everything",
+      "visual": "🔄",
+      "points": [
+        "Updates fix security holes that attackers actively exploit. Turn on automatic updates for your operating system, browser and apps.",
+        "Restart when prompted. Many updates only take effect after a restart.",
+        "Devices that no longer receive security updates (end-of-life) should be replaced."
+      ]
+    },
+    {
+      "title": "Download carefully",
+      "visual": "⬇️",
+      "points": [
+        "Install software only from official app stores or the vendor's own website, and at work only from approved sources.",
+        "Be wary of 'cracked' software, browser extensions with excessive permissions and fake 'update your player' pop-ups.",
+        "Sponsored search results can be malicious ads. Check the domain before downloading."
+      ]
+    },
+    {
+      "title": "Wi-Fi and travel",
+      "visual": "📶",
+      "points": [
+        "Public Wi-Fi can be fake or monitored. Prefer your phone's hotspot or your organisation's VPN for work.",
+        "Check you're on HTTPS for anything sensitive, and turn off auto-join for open networks.",
+        "Use a privacy screen and keep devices with you when travelling."
+      ]
+    },
+    {
+      "title": "Lost device? Act fast",
+      "visual": "📱",
+      "points": [
+        "Use a PIN or biometric lock and keep full-disk encryption on (BitLocker, FileVault, or built-in phone encryption).",
+        "Report a lost or stolen device immediately so it can be locked or wiped remotely.",
+        "Don't disable security tools such as antivirus or endpoint protection, even if they seem slow."
+      ]
+    }
+  ],
+  "questionsPerAttempt": 8,
+  "passMark": 0.75,
+  "questions": [
+    {
+      "id": "dv-1", "type": "mcq",
+      "q": "Why are software updates important for security?",
+      "options": ["They only add new emojis", "They fix vulnerabilities attackers can exploit", "They make devices slower on purpose", "They're only needed for games"],
+      "answer": 1,
+      "why": "Most updates include security fixes. Delaying them leaves known holes open."
+    },
+    {
+      "id": "dv-2", "type": "tf",
+      "q": "A pop-up on a website says your video player is out of date and offers a download. It's safe to install it.",
+      "answer": false,
+      "why": "Fake update prompts are a common malware delivery trick. Update software only through its own settings or official store."
+    },
+    {
+      "id": "dv-3", "type": "mcq",
+      "q": "You need to send a work document from a café. What's the safest option?",
+      "options": ["Connect to the open café Wi-Fi", "Use your phone hotspot or company VPN", "Ask the barista for their laptop", "Email it from a personal account"],
+      "answer": 1,
+      "why": "Your own hotspot or a VPN avoids untrusted networks. Personal accounts may break data-handling rules."
+    },
+    {
+      "id": "dv-4", "type": "mcq",
+      "q": "Your work laptop is stolen from your car. What should you do first?",
+      "options": ["Wait to see if it turns up", "Report it to IT/security immediately", "Buy a new one quietly", "Change your desktop wallpaper"],
+      "answer": 1,
+      "why": "Fast reporting allows remote lock/wipe and session revocation before data is accessed."
+    },
+    {
+      "id": "dv-5", "type": "tf",
+      "q": "Full-disk encryption helps protect data if a device is lost or stolen.",
+      "answer": true,
+      "why": "Without the key, an encrypted drive's data is unreadable, even if the drive is removed."
+    },
+    {
+      "id": "dv-6", "type": "mcq",
+      "q": "A browser extension that changes page colours asks to 'read and change all your data on all websites'. What should you do?",
+      "options": ["Accept, all extensions ask this", "Decline, the permission is far more than it needs", "Install it on a work device only", "Accept and uninstall later"],
+      "answer": 1,
+      "why": "Over-privileged extensions can read passwords and session data. Choose tools whose permissions match their purpose."
+    },
+    {
+      "id": "dv-7", "type": "tf",
+      "q": "It's fine to turn off endpoint protection if it slows down your computer.",
+      "answer": false,
+      "why": "Security tools protect you and your organisation. Report performance problems to IT instead of disabling protection."
+    },
+    {
+      "id": "dv-8", "type": "mcq",
+      "q": "Which source is safest for downloading software at work?",
+      "options": ["A top search ad", "A file-sharing forum", "Your organisation's approved software portal", "A link in a chat from a stranger"],
+      "answer": 2,
+      "why": "Approved portals deliver vetted, licensed software. Search ads and forums are common malware sources."
+    },
+    {
+      "id": "dv-9", "type": "tf",
+      "q": "An old laptop that no longer gets security updates is safe as long as it has antivirus.",
+      "answer": false,
+      "why": "End-of-life systems accumulate unpatched vulnerabilities that antivirus can't fully cover. Replace or isolate them."
+    },
+    {
+      "id": "dv-10", "type": "mcq",
+      "q": "What's a good habit for phones and laptops?",
+      "options": ["No screen lock so it's faster", "A PIN or biometric lock with auto-lock enabled", "Share your PIN with your team", "Use 0000 as a PIN"],
+      "answer": 1,
+      "why": "A screen lock with a short auto-lock time is the simplest protection against casual access."
+    }
+  ],
+  "sources": [
+    { "title": "CISA – Secure Our World: Update Software", "url": "https://www.cisa.gov/secure-our-world/update-software" },
+    { "title": "UK NCSC – Cyber Aware: top tips for staying secure online", "url": "https://www.ncsc.gov.uk/cyberaware/home" },
+    { "title": "UK NCSC – Device Security Guidance", "url": "https://www.ncsc.gov.uk/collection/device-security-guidance" }
+  ]
+}

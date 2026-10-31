@@ -1,0 +1,126 @@
+{
+  "slug": "responsible-ai",
+  "version": 1,
+  "track": "ai-basics",
+  "order": 2,
+  "title": "Responsible AI & the Rules",
+  "icon": "⚖️",
+  "summary": "Bias, transparency, human oversight, and the frameworks and laws shaping AI.",
+  "level": "Intermediate",
+  "minutes": 8,
+  "lessons": [
+    {
+      "title": "What 'responsible AI' means",
+      "visual": "🤝",
+      "points": [
+        "NIST's AI Risk Management Framework describes trustworthy AI as: valid and reliable, safe, secure and resilient, accountable and transparent, explainable and interpretable, privacy-enhanced, and fair with harmful bias managed.",
+        "Responsible AI means designing, using and monitoring AI so these qualities hold up in the real world."
+      ]
+    },
+    {
+      "title": "Bias and fairness",
+      "visual": "🎯",
+      "points": [
+        "AI learns from data, and data can reflect historical unfairness, which models may repeat or amplify.",
+        "High-impact uses such as hiring, lending, healthcare and policing need testing for unfair outcomes across groups.",
+        "Keep a human in the loop for decisions that significantly affect people."
+      ]
+    },
+    {
+      "title": "Frameworks: NIST AI RMF & ISO/IEC 42001",
+      "visual": "🧭",
+      "points": [
+        "The NIST AI RMF 1.0 (January 2023) is voluntary and organised around four functions: Govern, Map, Measure and Manage.",
+        "NIST AI 600-1 (July 2024) is a Generative AI Profile that applies the framework to generative AI risks.",
+        "ISO/IEC 42001:2023 is an international standard for an AI management system, similar in style to ISO/IEC 27001 for security."
+      ]
+    },
+    {
+      "title": "Law: the EU AI Act",
+      "visual": "🇪🇺",
+      "points": [
+        "The EU AI Act entered into force on 1 August 2024 and uses a risk-based approach: unacceptable, high, limited (transparency) and minimal risk.",
+        "Bans on certain prohibited practices, and an AI literacy duty for providers and deployers, have applied since 2 February 2025.",
+        "Rules for general-purpose AI model providers have applied since 2 August 2025, and most other rules since 2 August 2026. A 2026 amendment moved many high-risk rules to December 2027 and August 2028."
+      ],
+      "tip": "Even outside the EU, these ideas (transparency, human oversight, risk assessment) are becoming normal expectations."
+    }
+  ],
+  "questionsPerAttempt": 8,
+  "passMark": 0.75,
+  "questions": [
+    {
+      "id": "ra-1", "type": "mcq",
+      "q": "What are the four core functions of the NIST AI Risk Management Framework?",
+      "options": ["Plan, Do, Check, Act", "Govern, Map, Measure, Manage", "Identify, Protect, Detect, Respond", "Collect, Train, Deploy, Retire"],
+      "answer": 1,
+      "why": "The AI RMF 1.0 core is organised into Govern, Map, Measure and Manage."
+    },
+    {
+      "id": "ra-2", "type": "tf",
+      "q": "The NIST AI RMF is a mandatory law for all organisations worldwide.",
+      "answer": false,
+      "why": "The AI RMF is voluntary guidance. Laws like the EU AI Act are a separate matter."
+    },
+    {
+      "id": "ra-3", "type": "mcq",
+      "q": "How can bias enter an AI system?",
+      "options": ["Only through bad luck", "Through training data that reflects historical or sampling bias, and through design choices", "It cannot: AI is always neutral", "Only through the user's screen settings"],
+      "answer": 1,
+      "why": "Biased or unrepresentative data and design decisions can lead to unfair outcomes."
+    },
+    {
+      "id": "ra-4", "type": "mcq",
+      "q": "What approach does the EU AI Act take?",
+      "options": ["It bans all AI", "A risk-based approach with stricter rules for higher-risk uses", "It only applies to robots", "It has no rules, only advice"],
+      "answer": 1,
+      "why": "The Act sorts AI uses by risk, from prohibited practices to minimal-risk uses with few obligations."
+    },
+    {
+      "id": "ra-5", "type": "tf",
+      "q": "The EU AI Act's prohibitions and AI literacy obligations have applied since 2 February 2025.",
+      "answer": true,
+      "why": "Those first provisions became applicable on 2 February 2025, six months after entry into force on 1 August 2024."
+    },
+    {
+      "id": "ra-6", "type": "mcq",
+      "q": "An AI tool screens job applicants. What is the most responsible practice?",
+      "options": ["Let it reject candidates automatically with no review", "Test for unfair outcomes and keep meaningful human review of decisions", "Hide its use from candidates", "Train it only on past hires without checking"],
+      "answer": 1,
+      "why": "Hiring is high-impact. Bias testing, transparency and human oversight are key safeguards."
+    },
+    {
+      "id": "ra-7", "type": "mcq",
+      "q": "What is ISO/IEC 42001?",
+      "options": ["A Wi-Fi standard", "An international standard for AI management systems", "A programming language", "A data centre cooling rule"],
+      "answer": 1,
+      "why": "ISO/IEC 42001:2023 specifies requirements for establishing and improving an AI management system."
+    },
+    {
+      "id": "ra-8", "type": "tf",
+      "q": "Telling people when they are interacting with an AI system is a common transparency expectation.",
+      "answer": true,
+      "why": "Transparency, including disclosure of AI interaction and AI-generated content, appears in frameworks and in the EU AI Act."
+    },
+    {
+      "id": "ra-9", "type": "mcq",
+      "q": "Which of these is listed by NIST as a characteristic of trustworthy AI?",
+      "options": ["Always the cheapest", "Accountable and transparent", "Fully autonomous", "Closed source"],
+      "answer": 1,
+      "why": "NIST's trustworthy characteristics include accountable and transparent, along with valid and reliable, safe, secure and resilient, explainable, privacy-enhanced, and fair."
+    },
+    {
+      "id": "ra-10", "type": "mcq",
+      "q": "What does 'human in the loop' mean?",
+      "options": ["A person reviews or approves the AI's important outputs or actions", "A human trains every token", "The AI runs on a person's laptop", "Users must type in loops"],
+      "answer": 0,
+      "why": "Human oversight lets people catch errors and harms before they have impact."
+    }
+  ],
+  "sources": [
+    { "title": "NIST AI 100-1 – AI Risk Management Framework 1.0", "url": "https://nvlpubs.nist.gov/nistpubs/ai/NIST.AI.100-1.pdf" },
+    { "title": "NIST AI 600-1 – Generative AI Profile", "url": "https://nvlpubs.nist.gov/nistpubs/ai/NIST.AI.600-1.pdf" },
+    { "title": "European Commission – AI Act", "url": "https://digital-strategy.ec.europa.eu/en/policies/regulatory-framework-ai" },
+    { "title": "ISO/IEC 42001:2023 – AI management systems", "url": "https://www.iso.org/standard/42001" }
+  ]
+}

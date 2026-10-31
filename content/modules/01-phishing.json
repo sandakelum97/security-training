@@ -1,0 +1,155 @@
+{
+  "slug": "phishing",
+  "version": 1,
+  "track": "cyber",
+  "order": 1,
+  "title": "Spotting Phishing",
+  "icon": "🎣",
+  "summary": "Recognise fake emails, texts and login pages before they hook you.",
+  "level": "Beginner",
+  "minutes": 7,
+  "lessons": [
+    {
+      "title": "What is phishing?",
+      "visual": "🎣",
+      "points": [
+        "Phishing is a message that pretends to come from someone you trust so you click a link, open a file, share a password or send money.",
+        "It arrives by email, text (smishing), phone call (vishing), chat apps, social media and even QR codes (quishing).",
+        "In the FBI's 2024 Internet Crime Report, phishing/spoofing was the most-reported type of cybercrime."
+      ],
+      "tip": "Attackers don't need to hack a computer if they can trick a person into opening the door."
+    },
+    {
+      "title": "The red flags",
+      "visual": "🚩",
+      "points": [
+        "Urgency or fear: \"Your account will be closed in 24 hours.\"",
+        "A request that's unusual for the sender: gift cards, a password, changing bank details, a secret payment.",
+        "A sender address or link domain that doesn't match the real organisation (e.g. micros0ft-support.com).",
+        "Unexpected attachments, especially ones that ask you to \"enable content\" or log in to view them."
+      ]
+    },
+    {
+      "title": "Check the link before you click",
+      "visual": "🔍",
+      "points": [
+        "On a computer, hover over a link to see where it really goes. On a phone, press and hold.",
+        "Read the domain right-to-left from the first single slash: in login.example.com.evil.net/x the real site is evil.net.",
+        "The padlock only means the connection is encrypted. Criminal sites use HTTPS too."
+      ],
+      "tip": "When in doubt, don't use the link. Type the address yourself or use the official app."
+    },
+    {
+      "title": "What to do",
+      "visual": "🛡️",
+      "points": [
+        "Don't reply, click, or open attachments in a suspicious message.",
+        "Verify using a contact method you already know, not the phone number or link in the message.",
+        "Report it using your organisation's report button or IT/security team, then delete it.",
+        "Clicked already? Report straight away. Fast reporting limits damage, and nobody should be punished for it."
+      ]
+    }
+  ],
+  "questionsPerAttempt": 8,
+  "passMark": 0.75,
+  "questions": [
+    {
+      "id": "ph-1", "type": "mcq",
+      "q": "Which of these is the strongest sign an email may be phishing?",
+      "options": ["It uses your first name", "It pressures you to act immediately or face a penalty", "It has the company logo", "It was sent during business hours"],
+      "answer": 1,
+      "why": "Urgency and threats are classic manipulation tactics designed to stop you thinking. Names and logos are easy to fake."
+    },
+    {
+      "id": "ph-2", "type": "tf",
+      "q": "A padlock icon (HTTPS) in the browser means the website is safe and legitimate.",
+      "answer": false,
+      "why": "HTTPS only means the connection is encrypted. Phishing sites routinely use HTTPS, so always check the domain name itself."
+    },
+    {
+      "id": "ph-3", "type": "mcq",
+      "q": "In the address https://login.mybank.com.secure-check.net/verify, which site would you actually be visiting?",
+      "options": ["mybank.com", "login.mybank.com", "secure-check.net", "verify"],
+      "answer": 2,
+      "why": "The web address ends at the first single slash. Reading right to left from there, the real (registered) domain is secure-check.net. Everything to its left is just a subdomain the attacker controls."
+    },
+    {
+      "id": "ph-4", "type": "email",
+      "email": {
+        "from": "IT Service Desk <helpdesk@it-support-portal365.com>",
+        "subject": "ACTION REQUIRED: Mailbox storage full – verify within 2 hours",
+        "body": "Dear user,\n\nYour mailbox has exceeded its limit and incoming messages are being blocked. To avoid permanent deletion of your emails, verify your account within 2 hours.\n\nThank you,\nIT Service Desk",
+        "links": [{ "text": "Verify my mailbox", "href": "http://it-support-portal365.com/owa/login.php" }]
+      },
+      "answer": "phish",
+      "why": "Generic greeting, an outside domain pretending to be your IT team, a tight deadline and a link to a login page. Your real IT team won't ask you to sign in through an email link like this."
+    },
+    {
+      "id": "ph-5", "type": "email",
+      "email": {
+        "from": "Calendar <calendar-notification@google.com>",
+        "subject": "Invitation: Team stand-up @ Mon 9:30am",
+        "body": "You have been invited to the following event by your manager.\n\nTeam stand-up\nMonday 9:30am – 9:45am\n\nAccept or decline from your calendar.",
+        "links": [{ "text": "View in Calendar", "href": "https://calendar.google.com/calendar/event?eid=abc123" }]
+      },
+      "answer": "legit",
+      "why": "The sender and link both use the real google.com domain, there's no pressure, and it expects something you were likely waiting for. Still, if an invite comes from someone unexpected, check with them."
+    },
+    {
+      "id": "ph-6", "type": "mcq",
+      "q": "You receive a text from \"your bank\" with a link saying a payment was blocked. What's the safest action?",
+      "options": ["Tap the link quickly to cancel the payment", "Reply STOP", "Open your bank's official app or call the number on your card", "Forward the text to friends to warn them"],
+      "answer": 2,
+      "why": "Contact the bank through a channel you already trust. Replying confirms your number is active and the link may lead to a fake login page."
+    },
+    {
+      "id": "ph-7", "type": "tf",
+      "q": "If you clicked a phishing link, it's better to stay quiet and hope nothing happens.",
+      "answer": false,
+      "why": "Report it immediately. Quick reporting lets the security team reset passwords, block the site and limit damage."
+    },
+    {
+      "id": "ph-8", "type": "mcq",
+      "q": "A QR code on a parking meter sticker takes you to a payment page. What's the risk?",
+      "options": ["None, QR codes can't be malicious", "It may lead to a fake payment site (\"quishing\")", "It will drain your phone battery", "It only works on iPhones"],
+      "answer": 1,
+      "why": "QR codes are just links you can't read. Criminals stick fake codes over real ones. Check the address your camera shows and prefer the official app or website."
+    },
+    {
+      "id": "ph-9", "type": "email",
+      "email": {
+        "from": "Jordan Lee (CEO) <jordan.lee.ceo@gmail.com>",
+        "subject": "Quick favour – confidential",
+        "body": "Hi, are you at your desk? I'm in a meeting and need you to buy five gift cards for a client today. Keep this between us for now. Send me the codes when done.\n\nSent from my phone",
+        "links": []
+      },
+      "answer": "phish",
+      "why": "A personal email address, secrecy, urgency and gift cards are hallmarks of CEO fraud. Verify through a known number or your normal internal chat."
+    },
+    {
+      "id": "ph-10", "type": "mcq",
+      "q": "An attachment named Invoice.pdf.html asks you to sign in to view it. What is most likely happening?",
+      "options": ["It's a normal secure PDF", "It's an HTML page posing as a PDF to steal your password", "Your PDF reader needs updating", "The sender's computer is slow"],
+      "answer": 1,
+      "why": "The real file type is the last extension (.html). Fake 'sign in to view this document' pages are a common way to steal credentials."
+    },
+    {
+      "id": "ph-11", "type": "tf",
+      "q": "Phishing messages always contain spelling mistakes, so a well-written message is safe.",
+      "answer": false,
+      "why": "Many phishing messages are polished, and AI tools make flawless writing easy. Judge the request and the sender, not the grammar."
+    },
+    {
+      "id": "ph-12", "type": "mcq",
+      "q": "What is the best way to report a phishing email at work?",
+      "options": ["Reply to the sender asking if it's real", "Forward it to all colleagues", "Use the report button or send it to your IT/security team", "Just delete it and say nothing"],
+      "answer": 2,
+      "why": "Reporting helps the security team block the message for everyone and spot campaigns. Replying or forwarding widely can spread the risk."
+    }
+  ],
+  "sources": [
+    { "title": "FBI IC3 – 2024 Internet Crime Report", "url": "https://www.ic3.gov/AnnualReport/Reports/2024_IC3Report.pdf" },
+    { "title": "CISA – Recognize and Report Phishing", "url": "https://www.cisa.gov/secure-our-world/recognize-and-report-phishing" },
+    { "title": "UK NCSC – Phishing: spot and report scam emails, texts, websites and calls", "url": "https://www.ncsc.gov.uk/collection/phishing-scams" }
+  ]
+}

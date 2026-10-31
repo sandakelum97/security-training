@@ -1,0 +1,125 @@
+{
+  "slug": "ai-fundamentals",
+  "version": 1,
+  "track": "ai-basics",
+  "order": 1,
+  "title": "AI Fundamentals",
+  "icon": "🧠",
+  "summary": "What AI, machine learning and large language models actually are, in plain language.",
+  "level": "Beginner",
+  "minutes": 7,
+  "lessons": [
+    {
+      "title": "AI, ML and deep learning",
+      "visual": "🧠",
+      "points": [
+        "Artificial intelligence (AI) is the broad field of making computers do tasks that normally need human intelligence.",
+        "Machine learning (ML) is a type of AI where systems learn patterns from data instead of following hand-written rules.",
+        "Deep learning is ML using many-layered neural networks. It powers modern image, speech and language AI."
+      ]
+    },
+    {
+      "title": "How a large language model works",
+      "visual": "💬",
+      "points": [
+        "A large language model (LLM) is trained on huge amounts of text to predict the next token, a word or piece of a word.",
+        "By repeatedly predicting the next token, it can answer questions, summarise, translate and write code.",
+        "It doesn't look facts up by default. It generates likely-sounding text, which is why it can be wrong."
+      ]
+    },
+    {
+      "title": "Training vs. using a model",
+      "visual": "🏋️",
+      "points": [
+        "Training: the model learns from data. It's expensive and done in advance by the developer.",
+        "Inference: using the trained model to produce an answer, which happens every time you send a prompt.",
+        "A model's knowledge stops at its training cut-off unless it's connected to search or documents (retrieval-augmented generation, RAG)."
+      ]
+    },
+    {
+      "title": "Strengths and limits",
+      "visual": "⚖️",
+      "points": [
+        "Great at drafting, summarising, brainstorming, explaining and transforming text or code.",
+        "Weak points: hallucinations, outdated knowledge, bias from training data, and inconsistent answers to the same question.",
+        "Generative AI creates new content (text, images, audio). Predictive AI classifies or forecasts, like spam filters or fraud scores."
+      ]
+    }
+  ],
+  "questionsPerAttempt": 8,
+  "passMark": 0.75,
+  "questions": [
+    {
+      "id": "af-1", "type": "mcq",
+      "q": "What is machine learning?",
+      "options": ["Robots that learn to walk only", "Systems that learn patterns from data rather than only following hand-written rules", "A faster computer chip", "A programming language"],
+      "answer": 1,
+      "why": "ML systems improve at a task by learning from examples in data."
+    },
+    {
+      "id": "af-2", "type": "mcq",
+      "q": "At its core, what is a large language model trained to do?",
+      "options": ["Search the internet", "Predict the next token in a sequence of text", "Store a copy of every website", "Run a database"],
+      "answer": 1,
+      "why": "LLMs are trained to predict the next token, and that simple objective at huge scale produces useful language abilities."
+    },
+    {
+      "id": "af-3", "type": "tf",
+      "q": "An LLM always looks up facts in a live database before answering.",
+      "answer": false,
+      "why": "By default a model generates text from patterns learned in training. Some apps add search or document retrieval, but the base model doesn't."
+    },
+    {
+      "id": "af-4", "type": "mcq",
+      "q": "What is an AI 'hallucination'?",
+      "options": ["A glitch in the screen", "Confident, plausible output that is false or made up", "When the AI refuses to answer", "A visual art feature"],
+      "answer": 1,
+      "why": "Models can produce fluent but incorrect answers, including invented sources."
+    },
+    {
+      "id": "af-5", "type": "mcq",
+      "q": "What is 'inference'?",
+      "options": ["Training a model from scratch", "Using a trained model to generate an output", "Deleting training data", "Buying more GPUs"],
+      "answer": 1,
+      "why": "Inference is running the trained model on new input, which happens every time you send a prompt."
+    },
+    {
+      "id": "af-6", "type": "tf",
+      "q": "A model's built-in knowledge generally stops at its training cut-off date.",
+      "answer": true,
+      "why": "Unless connected to search or documents, a model doesn't know about events after its training data was collected."
+    },
+    {
+      "id": "af-7", "type": "mcq",
+      "q": "What does RAG (retrieval-augmented generation) do?",
+      "options": ["Makes the model bigger", "Fetches relevant documents and gives them to the model as context for its answer", "Removes bias completely", "Encrypts prompts"],
+      "answer": 1,
+      "why": "RAG retrieves relevant information (e.g. from your documents) and adds it to the prompt so answers can be grounded in it."
+    },
+    {
+      "id": "af-8", "type": "mcq",
+      "q": "Which is an example of predictive (not generative) AI?",
+      "options": ["Writing a poem", "Creating an image from text", "An email spam filter classifying messages", "Generating a song"],
+      "answer": 2,
+      "why": "Spam filters classify existing items. Generative AI creates new content."
+    },
+    {
+      "id": "af-9", "type": "tf",
+      "q": "Asking an LLM the same question twice can give different answers.",
+      "answer": true,
+      "why": "Outputs are often sampled with some randomness, so wording and even conclusions can vary."
+    },
+    {
+      "id": "af-10", "type": "mcq",
+      "q": "What is a 'token' in the context of LLMs?",
+      "options": ["A cryptocurrency", "A chunk of text, such as a word or part of a word, that the model processes", "A login password", "A type of GPU"],
+      "answer": 1,
+      "why": "Models break text into tokens. Usage limits and pricing are often measured in tokens."
+    }
+  ],
+  "sources": [
+    { "title": "NIST AI 100-1 – AI Risk Management Framework 1.0", "url": "https://nvlpubs.nist.gov/nistpubs/ai/NIST.AI.100-1.pdf" },
+    { "title": "NIST AI 600-1 – Generative AI Profile", "url": "https://nvlpubs.nist.gov/nistpubs/ai/NIST.AI.600-1.pdf" },
+    { "title": "OECD – Explanatory memorandum on the updated OECD definition of an AI system", "url": "https://www.oecd.org/en/publications/explanatory-memorandum-on-the-updated-oecd-definition-of-an-ai-system_623da898-en.html" }
+  ]
+}
