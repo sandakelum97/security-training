@@ -7,6 +7,8 @@ import { z } from 'zod';
 import { config } from './config.js';
 import { q } from './db.js';
 import { modules, catalogEntry, publicQuestion } from './content.js';
+import { waitUntil } from '@vercel/functions';
+import { emailEnabled, createResetToken, sendResetEmail, consumeResetToken, resetLink } from './reset.js';
 import { hashPassword, verifyPassword, getDummyHash, passwordProblem, issueSession, clearSession, requireUser, requireAdmin } from './auth.js';
 
 export const app = express();
@@ -45,7 +47,7 @@ api.use((req, res, next) => {
   next();
 });
 
-const authLimiter = rateLimit({ windowMs: 15 * 60_000, limit: 20, standardHeaders: 'draft-8', legacyHeaders: false,
+const authLimiter = rateLimit({ windowMs: 15 * 60_000, limit: Number(process.env.AUTH_RATE_LIMIT || 20), standardHeaders: 'draft-8', legacyHeaders: false,
   message: { error: 'Too many attempts. Please wait a few minutes and try again.' } });
 
 const wrap = fn => (req, res, next) => Promise.resolve(fn(req, res, next)).catch(next);
@@ -99,6 +101,41 @@ api.post('/auth/login', authLimiter, wrap(async (req, res) => {
 api.post('/auth/logout', requireUser, wrap(async (req, res) => {
   await q('UPDATE users SET token_version = token_version + 1 WHERE id = $1', [req.user.id]);
   clearSession(res);
+  res.json({ ok: true });
+}));
+
+// ---------- Password reset ----------
+api.get('/auth/options', (req, res) => res.json({ emailReset: emailEnabled(), registration: config.allowRegistration }));
+
+// Same response whether or not the email exists, and the email is sent after responding.
+api.post('/auth/forgot', authLimiter, wrap(async (req, res) => {
+  const { email } = parse(z.object({ email: Email }), req.body);
+  if (!emailEnabled()) return res.json({ ok: true, message: 'Ask your administrator for a password reset link.' });
+  res.json({ ok: true, message: 'If an account exists for that email, a reset link is on its way. It expires in 30 minutes.' });
+  const job = (async () => {
+    const user = (await q('SELECT id, name FROM users WHERE email = $1', [email])).rows[0];
+    if (user) await sendResetEmail(email, user.name, await createResetToken(user.id));
+  })().catch(err => console.error('forgot-password job failed:', err.code || err.name));
+  if (process.env.VERCEL) waitUntil(job);
+}));
+
+api.post('/auth/reset', authLimiter, wrap(async (req, res) => {
+  const { token, password } = parse(z.object({ token: z.string().regex(/^[\w-]{40,64}$/, 'This reset link is invalid.'), password: z.string().max(256) }), req.body);
+  const problem = await consumeResetToken(token, password);
+  if (problem) return res.status(400).json({ error: problem });
+  res.json({ ok: true });
+}));
+
+api.post('/me/password', authLimiter, requireUser, wrap(async (req, res) => {
+  const { current, password } = parse(z.object({ current: z.string().min(1).max(256), password: z.string().max(256) }), req.body);
+  const { rows } = await q('SELECT password_hash FROM users WHERE id = $1', [req.user.id]);
+  if (!(await verifyPassword(current, rows[0].password_hash))) return res.status(400).json({ error: 'Your current password is incorrect.' });
+  const problem = await passwordProblem(password, req.user);
+  if (problem) return res.status(400).json({ error: problem });
+  const upd = await q(`UPDATE users SET password_hash = $1, token_version = token_version + 1 WHERE id = $2
+    RETURNING id, token_version`, [await hashPassword(password), req.user.id]);
+  await q('DELETE FROM password_resets WHERE user_id = $1', [req.user.id]);
+  await issueSession(res, upd.rows[0]); // keep this device signed in; every other session is revoked
   res.json({ ok: true });
 }));
 
@@ -242,6 +279,16 @@ admin.patch('/users/:id', wrap(async (req, res) => {
   // Bump token_version so the change applies to any live session immediately.
   const { rowCount } = await q('UPDATE users SET role = $1, token_version = token_version + 1 WHERE id = $2', [role, id]);
   rowCount ? res.json({ ok: true }) : res.status(404).json({ error: 'User not found.' });
+}));
+
+// Admin-generated one-time link, for when email isn't configured. Share it with the user privately.
+admin.post('/users/:id/reset-link', wrap(async (req, res) => {
+  const id = parse(Uuid, req.params.id);
+  if (!notSelf(req, res, id)) return;
+  const user = (await q('SELECT id FROM users WHERE id = $1', [id])).rows[0];
+  if (!user) return res.status(404).json({ error: 'User not found.' });
+  const origin = config.appOrigin || `${req.protocol}://${req.get('host')}`;
+  res.json({ link: resetLink(origin, await createResetToken(id)), expiresInMinutes: 30 });
 }));
 
 admin.delete('/users/:id', wrap(async (req, res) => {

@@ -87,7 +87,51 @@ function authView(mode = 'login') {
       h('h1', {}, 'Learn to spot the tricks before they work on you.'),
       h('p', {}, 'Short, interactive lessons on phishing, passwords, scams and AI, followed by a quick quiz. About seven minutes each, no jargon.'),
       h('div', { class: 'track-pills' }, Object.entries(TRACKS).map(([k, [name]]) => h('span', { class: `pill ${k}` }, name)))),
-    h('div', { class: 'panel' }, h('div', { class: 'tabs', role: 'tablist' }, tab('login', 'Sign in'), tab('register', 'Create account')), form));
+    h('div', { class: 'panel' }, h('div', { class: 'tabs', role: 'tablist' }, tab('login', 'Sign in'), tab('register', 'Create account')), form,
+      !isReg && h('p', { class: 'hint' }, h('a', { href: '#/forgot' }, 'Forgot your password?'))));
+}
+
+// ---------- Password reset ----------
+const authCard = (title, intro, ...body) => h('section', { class: 'auth' },
+  h('div', { class: 'auth-intro' }, h('h1', {}, title), h('p', {}, intro)), h('div', { class: 'panel' }, ...body));
+
+function forgotView() {
+  const msg = h('p', { role: 'status', class: 'hint' });
+  const form = h('form', { novalidate: true, onsubmit: async e => {
+      e.preventDefault(); const btn = form.querySelector('button'); btn.disabled = true;
+      try { const r = await api('/auth/forgot', { method: 'POST', body: { email: form.email.value } }); msg.textContent = r.message; }
+      catch (ex) { msg.textContent = ex.message; btn.disabled = false; }
+    } },
+    h('label', { for: 'email' }, 'Email'), h('input', { id: 'email', name: 'email', type: 'email', required: true, autocomplete: 'email' }),
+    h('div', { class: 'row section' }, h('button', { class: 'btn', type: 'submit' }, 'Send reset link'), h('a', { href: '#/login' }, 'Back to sign in')), msg);
+  return authCard('Reset your password', 'Enter the email you signed up with. If email is set up for this site, we will send you a link that works for 30 minutes.', form);
+}
+
+function resetView(token) {
+  const err = h('p', { class: 'error', role: 'alert' });
+  const form = h('form', { novalidate: true, onsubmit: async e => {
+      e.preventDefault(); err.textContent = ''; const btn = form.querySelector('button'); btn.disabled = true;
+      try { await api('/auth/reset', { method: 'POST', body: { token, password: form.password.value } }); toast('Password changed. Sign in with your new password.'); state.me = null; go('#/login'); }
+      catch (ex) { err.textContent = ex.message; btn.disabled = false; }
+    } },
+    h('label', { for: 'password' }, 'New password'), h('input', { id: 'password', name: 'password', type: 'password', required: true, minlength: 15, autocomplete: 'new-password' }),
+    h('p', { class: 'hint' }, 'At least 15 characters. A few random words together is strong and easy to remember.'),
+    err, h('button', { class: 'btn', type: 'submit' }, 'Set new password'));
+  return authCard('Choose a new password', 'After you save it, you will be signed out on every device and can sign in with the new password.', form);
+}
+
+function changePasswordForm() {
+  const err = h('p', { class: 'error', role: 'alert' });
+  const form = h('form', { class: 'panel', novalidate: true, onsubmit: async e => {
+      e.preventDefault(); err.textContent = ''; const btn = form.querySelector('button'); btn.disabled = true;
+      try { await api('/me/password', { method: 'POST', body: { current: form.current.value, password: form.password.value } }); form.reset(); toast('Password changed. Other devices have been signed out.'); }
+      catch (ex) { err.textContent = ex.message; }
+      btn.disabled = false;
+    } },
+    h('label', { for: 'current' }, 'Current password'), h('input', { id: 'current', name: 'current', type: 'password', required: true, autocomplete: 'current-password' }),
+    h('label', { for: 'password' }, 'New password'), h('input', { id: 'password', name: 'password', type: 'password', required: true, minlength: 15, autocomplete: 'new-password' }),
+    h('p', { class: 'hint' }, 'At least 15 characters.'), err, h('button', { class: 'btn', type: 'submit' }, 'Change password'));
+  return h('section', { class: 'section narrow-left' }, h('h2', {}, 'Change password'), form);
 }
 
 // ---------- Hub ----------
@@ -247,7 +291,8 @@ async function meView() {
     h('section', { class: 'hero' }, h('div', {}, h('h1', {}, 'My progress'), h('p', { class: 'muted' }, state.me.email))),
     h('label', { class: 'toggle', for: 'lb' }, toggle, 'Show my name on the leaderboard'),
     h('section', { class: 'section' }, h('h2', {}, 'Quiz history'),
-      attempts.length ? attemptsTable(attempts, true) : h('p', {}, 'No quizzes yet. ', h('a', { href: '#/' }, 'Start your first module.'))));
+      attempts.length ? attemptsTable(attempts, true) : h('p', {}, 'No quizzes yet. ', h('a', { href: '#/' }, 'Start your first module.'))),
+    changePasswordForm());
 }
 function attemptsTable(rows, withCert) {
   return h('div', { class: 'scroll' }, h('table', {},
@@ -294,6 +339,7 @@ async function adminView() {
       h('button', { class: 'btn ghost', type: 'button', onclick: () => history(u) }, 'History'),
       u.id !== state.me.id && h('button', { class: 'btn ghost', type: 'button', onclick: () => act(`Make ${u.name} ${u.role === 'admin' ? 'a learner' : 'an admin'}?`,
         () => api(`/admin/users/${u.id}`, { method: 'PATCH', body: { role: u.role === 'admin' ? 'user' : 'admin' } })) }, u.role === 'admin' ? 'Remove admin' : 'Make admin'),
+      u.id !== state.me.id && h('button', { class: 'btn ghost', type: 'button', onclick: () => resetFor(u) }, 'Reset link'),
       u.id !== state.me.id && h('button', { class: 'btn danger', type: 'button', onclick: () => act(`Delete ${u.name} and all their results? This cannot be undone.`,
         () => api(`/admin/users/${u.id}`, { method: 'DELETE' })) }, 'Delete'));
     const rows = users.map(u => h('tr', {}, h('td', {}, u.name), h('td', {}, u.email),
@@ -306,6 +352,18 @@ async function adminView() {
         h('button', { class: 'btn ghost', type: 'button', disabled: page * 50 >= total, onclick: () => { page++; load(); } }, 'Next')));
   };
   const act = async (msg, fn) => { if (!confirm(msg)) return; try { await fn(); toast('Done'); load(); } catch (ex) { toast(ex.message); } };
+  const resetFor = async u => {
+    if (!confirm(`Create a one-time password reset link for ${u.name}? It works for 30 minutes.`)) return;
+    try {
+      const { link } = await api(`/admin/users/${u.id}/reset-link`, { method: 'POST' });
+      const box = h('input', { type: 'text', readonly: true, value: link, 'aria-label': 'Reset link', onfocus: e => e.target.select() });
+      detail.replaceChildren(h('section', { class: 'section panel' }, h('h2', {}, `Reset link for ${u.name}`),
+        h('p', {}, 'Send this to them privately, for example in a direct message. Anyone with the link can set the password. It works once, for 30 minutes.'),
+        box, h('div', { class: 'row section' }, h('button', { class: 'btn', type: 'button', onclick: async () => {
+          try { await navigator.clipboard.writeText(link); toast('Link copied'); } catch { box.focus(); toast('Press Ctrl+C to copy'); } } }, 'Copy link'))));
+      detail.scrollIntoView({ behavior: reduced ? 'auto' : 'smooth' });
+    } catch (ex) { toast(ex.message); }
+  };
   const history = async u => {
     const rows = await api(`/admin/users/${u.id}/attempts`);
     detail.replaceChildren(h('section', { class: 'section' }, h('h2', {}, `History for ${u.name}`), rows.length ? attemptsTable(rows) : h('p', {}, 'No completed quizzes yet.')));
@@ -327,6 +385,8 @@ async function render() {
   if (state.me?.org) document.getElementById('org').textContent = state.me.org;
   renderNav(key === '#/' || key === '#/m' ? '#/' : key);
   if (route === 'cert') return show(() => certView(arg));
+  if (route === 'reset') return view(resetView(arg));
+  if (route === 'forgot' && !state.me) return view(forgotView());
   if (!state.me) return view(authView());
   if (route === 'login') return go('#/');
   const routes = { '': hubView, m: () => moduleView(arg), me: meView, leaderboard: leaderboardView, admin: adminView };
