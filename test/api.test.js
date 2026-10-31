@@ -110,3 +110,14 @@ test('wrong password does not reveal whether the email exists', async () => {
   const unknown = await call('/auth/login', { method: 'POST', body: { email: 'ghost@test.invalid', password: 'nope-nope-nope-nope' } });
   assert.equal(known.status, 401); assert.deepEqual(known.body, unknown.body);
 });
+
+test('attempts started on an older module version cannot be answered or finished', async () => {
+  const cookie = await register('stale@test.invalid');
+  const start = await call('/modules/deepfakes/attempts', { method: 'POST', cookie });
+  await pool.query('UPDATE attempts SET module_version = module_version - 1 WHERE id = $1', [start.body.attemptId]);
+  const ans = await call(`/attempts/${start.body.attemptId}/answer`, { method: 'POST', cookie, body: { qid: start.body.questions[0].id, choice: 0 } });
+  assert.equal(ans.status, 409); assert.equal(ans.body.stale, true);
+  const fin = await call(`/attempts/${start.body.attemptId}/finish`, { method: 'POST', cookie });
+  assert.equal(fin.status, 409);
+  assert.equal((await pool.query('SELECT 1 FROM attempts WHERE id = $1', [start.body.attemptId])).rowCount, 0, 'stale attempt discarded');
+});
