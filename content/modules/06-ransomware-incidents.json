@@ -1,0 +1,125 @@
+{
+  "slug": "ransomware-incidents",
+  "version": 1,
+  "track": "cyber",
+  "order": 6,
+  "title": "Ransomware, Backups & Reporting",
+  "icon": "🚨",
+  "summary": "What ransomware does, how backups save the day, and how to report an incident.",
+  "level": "Intermediate",
+  "minutes": 7,
+  "lessons": [
+    {
+      "title": "What is ransomware?",
+      "visual": "🔒",
+      "points": [
+        "Ransomware is malware that encrypts files and systems, then demands payment to unlock them.",
+        "Many gangs also steal data first and threaten to publish it (\"double extortion\").",
+        "Common ways in: phishing, stolen passwords for remote access, and unpatched internet-facing systems."
+      ]
+    },
+    {
+      "title": "Backups: the 3-2-1 rule",
+      "visual": "💾",
+      "points": [
+        "Keep 3 copies of important data, on 2 different types of storage, with 1 copy off-site.",
+        "Keep at least one backup offline or immutable so ransomware can't encrypt it too.",
+        "Test restores regularly. A backup you've never restored is a hope, not a plan."
+      ]
+    },
+    {
+      "title": "Spot the warning signs",
+      "visual": "👀",
+      "points": [
+        "Files suddenly renamed with strange extensions or that won't open.",
+        "A ransom note on screen or in folders.",
+        "Your computer running very slowly, security tools disabled, or accounts you don't recognise."
+      ]
+    },
+    {
+      "title": "Report it, fast",
+      "visual": "📣",
+      "points": [
+        "Disconnect from the network (unplug the cable or turn off Wi-Fi) but don't switch the device off unless told to. Memory can hold evidence.",
+        "Report to your IT/security team immediately with what you saw and when.",
+        "Don't try to pay, negotiate or 'clean it up' yourself. Security teams and authorities discourage paying ransoms."
+      ],
+      "tip": "You are a sensor. Early reports turn disasters into minor incidents."
+    }
+  ],
+  "questionsPerAttempt": 8,
+  "passMark": 0.75,
+  "questions": [
+    {
+      "id": "rw-1", "type": "mcq",
+      "q": "What does ransomware typically do?",
+      "options": ["Speeds up your computer", "Encrypts files and demands payment, sometimes after stealing data", "Shows harmless adverts", "Only deletes your browser history"],
+      "answer": 1,
+      "why": "Ransomware encrypts data and demands payment. Many groups also steal data to threaten a leak."
+    },
+    {
+      "id": "rw-2", "type": "mcq",
+      "q": "What does the 3-2-1 backup rule mean?",
+      "options": ["3 passwords, 2 users, 1 admin", "3 copies, 2 types of storage, 1 off-site", "Back up 3 times a day for 2 weeks", "3 USB sticks in 2 drawers"],
+      "answer": 1,
+      "why": "Three copies, on two different media, with one stored off-site, so a single event can't wipe them all."
+    },
+    {
+      "id": "rw-3", "type": "tf",
+      "q": "A backup that has never been test-restored can be fully relied on.",
+      "answer": false,
+      "why": "Backups fail silently. Regular restore tests prove you can actually recover."
+    },
+    {
+      "id": "rw-4", "type": "mcq",
+      "q": "Your files suddenly have a strange new extension and a note demands Bitcoin. What's your first step?",
+      "options": ["Pay quickly before the price rises", "Disconnect from the network and report to IT/security", "Restart repeatedly", "Email the attacker"],
+      "answer": 1,
+      "why": "Isolating the device helps stop spread, and immediate reporting lets responders act. Leave it powered on unless told otherwise."
+    },
+    {
+      "id": "rw-5", "type": "tf",
+      "q": "Keeping one backup offline or immutable helps protect it from ransomware.",
+      "answer": true,
+      "why": "Ransomware often targets connected backups. An offline or immutable copy can't be encrypted by the attacker."
+    },
+    {
+      "id": "rw-6", "type": "mcq",
+      "q": "Which is a common way ransomware gets into an organisation?",
+      "options": ["Printer ink", "Phishing emails and stolen remote-access passwords", "Screen savers", "Turning on dark mode"],
+      "answer": 1,
+      "why": "Phishing, compromised credentials and unpatched internet-facing systems are among the most common entry points."
+    },
+    {
+      "id": "rw-7", "type": "tf",
+      "q": "If you think you caused an incident, you should wait until you're sure before reporting it.",
+      "answer": false,
+      "why": "Report as soon as you suspect something. Minutes matter, and security teams would rather check a false alarm."
+    },
+    {
+      "id": "rw-8", "type": "mcq",
+      "q": "What does 'double extortion' mean in ransomware?",
+      "options": ["Two ransom notes", "Encrypting data and threatening to leak stolen copies", "Charging in two currencies", "Attacking two computers"],
+      "answer": 1,
+      "why": "Attackers steal data before encrypting, then threaten publication to increase pressure even if you have backups."
+    },
+    {
+      "id": "rw-9", "type": "mcq",
+      "q": "What information is most useful when reporting a suspected incident?",
+      "options": ["Just 'my computer is weird'", "What you saw, when it happened, what you clicked or opened, and which device/account", "Your favourite colour", "Nothing, they'll figure it out"],
+      "answer": 1,
+      "why": "Clear facts and timing help responders act quickly and accurately."
+    },
+    {
+      "id": "rw-10", "type": "tf",
+      "q": "Government cyber agencies such as CISA and the FBI generally discourage paying ransoms.",
+      "answer": true,
+      "why": "Paying doesn't guarantee recovery and funds further attacks. Organisations should report incidents and seek guidance."
+    }
+  ],
+  "sources": [
+    { "title": "CISA – #StopRansomware Guide", "url": "https://www.cisa.gov/stopransomware/ransomware-guide" },
+    { "title": "CISA – StopRansomware", "url": "https://www.cisa.gov/stopransomware" },
+    { "title": "UK NCSC – Mitigating malware and ransomware attacks", "url": "https://www.ncsc.gov.uk/guidance/mitigating-malware-and-ransomware-attacks" }
+  ]
+}

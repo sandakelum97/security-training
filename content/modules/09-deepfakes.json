@@ -1,0 +1,112 @@
+{
+  "slug": "deepfakes",
+  "version": 1,
+  "track": "ai-security",
+  "order": 3,
+  "title": "Deepfakes & AI-Powered Scams",
+  "icon": "🎥",
+  "summary": "Cloned voices, fake video calls and AI-written lures, and the habits that beat them.",
+  "level": "Beginner",
+  "minutes": 6,
+  "lessons": [
+    {
+      "title": "Seeing is no longer believing",
+      "visual": "🎥",
+      "points": [
+        "Deepfakes are AI-generated or altered video, images or audio that imitate real people.",
+        "Voice cloning can produce a convincing copy of someone's voice from a short sample of their speech.",
+        "AI also writes flawless phishing messages in any language, so spelling mistakes are no longer a reliable clue."
+      ]
+    },
+    {
+      "title": "A real case",
+      "visual": "🏢",
+      "points": [
+        "In early 2024, a finance employee in engineering firm Arup's Hong Kong office joined a video call with what looked and sounded like the CFO and colleagues.",
+        "All of them were deepfakes. The employee made 15 transfers totalling HK$200 million (about US$25 million).",
+        "He had initially suspected the request was phishing. The realistic video call is what convinced him."
+      ]
+    },
+    {
+      "title": "Verify the request, not the face",
+      "visual": "✅",
+      "points": [
+        "For money, credentials or sensitive data, confirm through a separate, known channel: call back on a number you already have.",
+        "Agree a family or team 'safe word' or verification question for urgent requests.",
+        "Organisations should require two people to approve large or unusual payments."
+      ],
+      "tip": "Urgency + secrecy + money = stop and verify, no matter how real it looks."
+    },
+    {
+      "title": "Clues and limits",
+      "visual": "🔎",
+      "points": [
+        "Possible signs: odd lip-sync, unnatural blinking or lighting, robotic tone, refusing to switch channels or answer personal questions.",
+        "Detection tools and visual clues aren't reliable on their own. Good deepfakes can show none of these signs.",
+        "Process beats perception: verification steps work even when you can't tell it's fake."
+      ]
+    }
+  ],
+  "questionsPerAttempt": 7,
+  "passMark": 0.7,
+  "questions": [
+    {
+      "id": "df-1", "type": "mcq",
+      "q": "Your 'manager' calls with a slightly odd but familiar voice asking for an urgent supplier payment. What's the best action?",
+      "options": ["Pay, it's their voice", "Hang up and call them back on their known number or verify via a separate channel", "Ask them to email instead and then pay", "Ask a colleague to pay instead"],
+      "answer": 1,
+      "why": "Voices can be cloned. Out-of-band verification through a channel you already trust defeats voice and video impersonation."
+    },
+    {
+      "id": "df-2", "type": "tf",
+      "q": "If you can see someone on a live video call, you can be sure it's really them.",
+      "answer": false,
+      "why": "Real-time deepfake video exists. In the Arup case, every other participant on the call was fake."
+    },
+    {
+      "id": "df-3", "type": "mcq",
+      "q": "In the 2024 Arup deepfake case, roughly how much money was transferred?",
+      "options": ["About US$25 million", "About US$250", "About US$2,500", "Nothing was lost"],
+      "answer": 0,
+      "why": "The employee made 15 transfers totalling HK$200 million, about US$25 million, after a deepfake video call."
+    },
+    {
+      "id": "df-4", "type": "mcq",
+      "q": "Which control best protects an organisation from deepfake payment fraud?",
+      "options": ["Better webcams", "Two-person approval and call-back verification for payments", "Banning video calls", "Longer passwords"],
+      "answer": 1,
+      "why": "Process controls work regardless of how convincing the fake is."
+    },
+    {
+      "id": "df-5", "type": "tf",
+      "q": "Because AI writes fluent text, perfect grammar no longer means a message is safe.",
+      "answer": true,
+      "why": "Attackers use AI to write polished lures. Focus on the request, the sender and the channel."
+    },
+    {
+      "id": "df-6", "type": "mcq",
+      "q": "What is a 'safe word' used for?",
+      "options": ["A Wi-Fi password", "A pre-agreed phrase to verify a caller's identity in urgent situations", "A way to unlock your phone", "A strong password"],
+      "answer": 1,
+      "why": "A secret phrase agreed in person is hard for a scammer to know, even with a cloned voice."
+    },
+    {
+      "id": "df-7", "type": "tf",
+      "q": "Deepfake detection tools are 100% reliable, so you can skip verification if a tool says a call is genuine.",
+      "answer": false,
+      "why": "Detection is imperfect. Keep verification processes in place for sensitive requests."
+    },
+    {
+      "id": "df-8", "type": "mcq",
+      "q": "A video of a public figure endorsing an investment app goes viral. What's the safest reaction?",
+      "options": ["Invest quickly before it sells out", "Be sceptical, as celebrity deepfake endorsements are a common scam", "Share it with family", "Click the link to learn more"],
+      "answer": 1,
+      "why": "Deepfaked endorsements are widely used in investment scams. Check the person's official channels and regulated sources."
+    }
+  ],
+  "sources": [
+    { "title": "CNN – Arup revealed as victim of US$25 million deepfake scam (May 2024)", "url": "https://edition.cnn.com/2024/05/16/tech/arup-deepfake-scam-loss-hong-kong-intl-hnk" },
+    { "title": "FBI IC3 PSA – Criminals use generative AI to facilitate financial fraud (Dec 2024)", "url": "https://www.ic3.gov/PSA/2024/PSA241203" },
+    { "title": "NIST AI 600-1 – Generative AI Profile", "url": "https://nvlpubs.nist.gov/nistpubs/ai/NIST.AI.600-1.pdf" }
+  ]
+}

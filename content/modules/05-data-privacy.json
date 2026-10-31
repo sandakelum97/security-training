@@ -1,0 +1,125 @@
+{
+  "slug": "data-privacy",
+  "version": 1,
+  "track": "cyber",
+  "order": 5,
+  "title": "Protecting Data & Privacy",
+  "icon": "🗂️",
+  "summary": "Handle personal and confidential information the right way, every time.",
+  "level": "Beginner",
+  "minutes": 6,
+  "lessons": [
+    {
+      "title": "Know what's sensitive",
+      "visual": "🏷️",
+      "points": [
+        "Personal data is anything that identifies a person: names, emails, phone numbers, ID numbers, photos, location.",
+        "Some data needs extra care: health, financial, biometric, children's data and passwords.",
+        "Follow your organisation's classification labels (for example Public, Internal, Confidential)."
+      ]
+    },
+    {
+      "title": "Share the minimum",
+      "visual": "🤏",
+      "points": [
+        "Collect and share only what's needed for the task (data minimisation).",
+        "Give access to people who need it, and remove access when they no longer do.",
+        "Double-check recipients before sending. Autocomplete sends lots of data to the wrong person."
+      ],
+      "tip": "Ask: does this person need this data, for this purpose, right now?"
+    },
+    {
+      "title": "Store and send it safely",
+      "visual": "📦",
+      "points": [
+        "Use approved storage and sharing tools, not personal email or personal cloud accounts.",
+        "Prefer sharing links with restricted access over attachments, and set expiry dates.",
+        "Dispose of paper and devices securely: shredding, and IT-managed wiping."
+      ]
+    },
+    {
+      "title": "When something goes wrong",
+      "visual": "🚨",
+      "points": [
+        "Sent data to the wrong person? Lost a file? Report it immediately, even if it seems minor.",
+        "Many privacy laws (such as the EU GDPR) have strict deadlines for reporting breaches. GDPR's is 72 hours for organisations to notify the regulator.",
+        "Honest, quick reporting is always better than trying to fix it quietly."
+      ]
+    }
+  ],
+  "questionsPerAttempt": 8,
+  "passMark": 0.75,
+  "questions": [
+    {
+      "id": "dp-1", "type": "mcq",
+      "q": "Which of these is personal data?",
+      "options": ["A company's public logo", "A customer's phone number", "The office opening hours", "A weather forecast"],
+      "answer": 1,
+      "why": "A phone number can identify a specific person, so it's personal data."
+    },
+    {
+      "id": "dp-2", "type": "tf",
+      "q": "Forwarding work files to your personal email so you can work at home is acceptable if you delete them later.",
+      "answer": false,
+      "why": "Personal accounts are outside your organisation's controls and may break policy or law. Use approved remote-work tools."
+    },
+    {
+      "id": "dp-3", "type": "mcq",
+      "q": "What does 'data minimisation' mean?",
+      "options": ["Compressing files", "Collecting and sharing only the data needed for a purpose", "Deleting all data every month", "Using small fonts"],
+      "answer": 1,
+      "why": "Holding less data means less to lose, and it's a core principle in privacy laws such as the GDPR."
+    },
+    {
+      "id": "dp-4", "type": "mcq",
+      "q": "You accidentally emailed a customer list to the wrong external address. What should you do?",
+      "options": ["Nothing, they'll probably ignore it", "Report it to your manager/privacy or security team right away", "Email again asking them to delete it and tell no one", "Delete your sent copy"],
+      "answer": 1,
+      "why": "This may be a reportable data breach with legal deadlines. Report it immediately so the right steps are taken."
+    },
+    {
+      "id": "dp-5", "type": "tf",
+      "q": "Under the EU GDPR, organisations must generally notify the supervisory authority of a personal data breach within 72 hours of becoming aware of it, where feasible.",
+      "answer": true,
+      "why": "GDPR Article 33 sets the 72-hour expectation (unless the breach is unlikely to result in a risk to people's rights and freedoms)."
+    },
+    {
+      "id": "dp-6", "type": "mcq",
+      "q": "What's the safest way to share a confidential file with a colleague?",
+      "options": ["Public link anyone can open", "Approved sharing tool with access limited to that colleague", "Personal messaging app", "Print and leave on their desk"],
+      "answer": 1,
+      "why": "Restricted links in approved tools keep access controlled and auditable."
+    },
+    {
+      "id": "dp-7", "type": "tf",
+      "q": "Old paper records containing customer details can go in the normal recycling bin.",
+      "answer": false,
+      "why": "Use secure shredding or confidential waste bins. Discarded paper is a real source of data leaks."
+    },
+    {
+      "id": "dp-8", "type": "mcq",
+      "q": "A colleague who moved teams still has access to your project's HR folder. What's the right action?",
+      "options": ["Leave it, they're trustworthy", "Ask the folder owner/IT to remove access they no longer need", "Share your password with them too", "Make the folder public"],
+      "answer": 1,
+      "why": "Access should match current need (least privilege). Removing stale access reduces risk."
+    },
+    {
+      "id": "dp-9", "type": "tf",
+      "q": "Before sending an email with sensitive data, it's worth double-checking the recipients and attachments.",
+      "answer": true,
+      "why": "Mis-addressed emails are one of the most common causes of data breaches."
+    },
+    {
+      "id": "dp-10", "type": "mcq",
+      "q": "Which data usually needs the most protection?",
+      "options": ["Company newsletter", "Health or financial information about a person", "Public job adverts", "Cafeteria menu"],
+      "answer": 1,
+      "why": "Health and financial data can cause serious harm if exposed and often has extra legal protection."
+    }
+  ],
+  "sources": [
+    { "title": "GDPR Article 33 – Notification of a personal data breach", "url": "https://gdpr-info.eu/art-33-gdpr/" },
+    { "title": "UK ICO – Personal data breaches: a guide", "url": "https://ico.org.uk/for-organisations/report-a-breach/personal-data-breach/personal-data-breaches-a-guide/" },
+    { "title": "NIST SP 800-50 Rev. 1 – Building a Cybersecurity and Privacy Learning Program", "url": "https://csrc.nist.gov/pubs/sp/800/50/r1/final" }
+  ]
+}

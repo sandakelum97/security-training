@@ -1,0 +1,136 @@
+{
+  "slug": "social-engineering",
+  "version": 1,
+  "track": "cyber",
+  "order": 3,
+  "title": "Social Engineering & Payment Fraud",
+  "icon": "🎭",
+  "summary": "Phone scams, fake support, tailgating and invoice fraud: the human side of hacking.",
+  "level": "Beginner",
+  "minutes": 7,
+  "lessons": [
+    {
+      "title": "Hacking people, not computers",
+      "visual": "🎭",
+      "points": [
+        "Social engineering manipulates people into giving access, information or money.",
+        "Common levers: authority (\"I'm from head office\"), urgency, helpfulness, fear, and curiosity.",
+        "It happens by phone, text, chat, social media and in person, not just email."
+      ]
+    },
+    {
+      "title": "Business email compromise (BEC)",
+      "visual": "💸",
+      "points": [
+        "Criminals pose as a supplier or executive and ask to change bank details or make an urgent payment.",
+        "The FBI's 2024 report recorded about $2.8 billion in reported BEC losses in the US alone.",
+        "Defence: verify any payment or bank-detail change by calling a number you already have on file, never one in the request."
+      ],
+      "tip": "A two-minute phone call can stop a six-figure loss."
+    },
+    {
+      "title": "Fake help desks & callers",
+      "visual": "☎️",
+      "points": [
+        "Attackers call staff pretending to be IT, or call the help desk pretending to be staff, to reset passwords and MFA.",
+        "Caller ID can be spoofed. A familiar number or name doesn't prove who is calling.",
+        "Hang up and call back through the official number or ticketing system."
+      ]
+    },
+    {
+      "title": "In the physical world",
+      "visual": "🚪",
+      "points": [
+        "Tailgating: someone follows you through a secure door. Politely ask them to badge in or go to reception.",
+        "Lock your screen whenever you step away (Windows + L, or Ctrl + Cmd + Q on a Mac).",
+        "Don't plug in USB drives you find. Hand them to IT."
+      ]
+    }
+  ],
+  "questionsPerAttempt": 8,
+  "passMark": 0.75,
+  "questions": [
+    {
+      "id": "se-1", "type": "mcq",
+      "q": "A supplier emails saying their bank account has changed and asks you to pay this month's invoice to the new account. What should you do?",
+      "options": ["Update the details and pay", "Reply to the email to confirm", "Call the supplier on the number already on file to verify", "Pay half to the old and half to the new account"],
+      "answer": 2,
+      "why": "Bank-detail changes are the core of business email compromise. Verify through an independent, known contact, never details in the same message."
+    },
+    {
+      "id": "se-2", "type": "tf",
+      "q": "If the caller ID shows your company's main number, the caller must be from your company.",
+      "answer": false,
+      "why": "Caller ID is easy to spoof. Verify by hanging up and calling back through an official number."
+    },
+    {
+      "id": "se-3", "type": "mcq",
+      "q": "Someone carrying boxes asks you to hold the secure door open for them. What's the best response?",
+      "options": ["Hold the door, they look busy", "Offer to help, but ask them to badge in or check in at reception", "Ignore them completely", "Give them your badge"],
+      "answer": 1,
+      "why": "Tailgating relies on politeness. You can be helpful and still make sure everyone uses their own access."
+    },
+    {
+      "id": "se-4", "type": "mcq",
+      "q": "Which psychological lever is used in: \"This is the CFO. I need this transfer done in the next 30 minutes, don't tell anyone\"?",
+      "options": ["Reciprocity", "Authority and urgency", "Social proof", "Scarcity of products"],
+      "answer": 1,
+      "why": "Claiming senior authority, adding a deadline and demanding secrecy are designed to bypass normal checks."
+    },
+    {
+      "id": "se-5", "type": "tf",
+      "q": "Plugging in a USB stick you found in the car park to find its owner is a safe, helpful thing to do.",
+      "answer": false,
+      "why": "Dropped USB devices are a known attack method and can run malicious code. Hand it to IT or security."
+    },
+    {
+      "id": "se-6", "type": "mcq",
+      "q": "A pop-up says your computer is infected and to call 'Microsoft Support' at a number shown. What is this?",
+      "options": ["A genuine Windows alert", "A tech-support scam", "A normal antivirus update", "A browser feature"],
+      "answer": 1,
+      "why": "Real security warnings don't ask you to phone a number. Close the browser tab (or restart) and report it."
+    },
+    {
+      "id": "se-7", "type": "mcq",
+      "q": "What should you do when you leave your desk for a coffee?",
+      "options": ["Nothing, it's only five minutes", "Lock your screen", "Turn off the monitor only", "Ask a colleague to watch it"],
+      "answer": 1,
+      "why": "Locking takes a second (Windows + L) and stops anyone using your logged-in session."
+    },
+    {
+      "id": "se-8", "type": "email",
+      "email": {
+        "from": "Accounts – Northwind Supplies <accounts@northwind-supp1ies.com>",
+        "subject": "Updated remittance details – please action today",
+        "body": "Hello,\n\nDue to an audit our banking has changed. Please use the attached new details for invoice #4471 and all future payments. We need payment today to avoid a late fee.\n\nKind regards,\nAccounts Team",
+        "links": []
+      },
+      "answer": "phish",
+      "why": "A look-alike domain (supp1ies with a number 1), changed bank details and a same-day deadline. Call the supplier on the number you already have."
+    },
+    {
+      "id": "se-9", "type": "tf",
+      "q": "Oversharing on social media (job role, manager's name, travel plans) can help attackers craft convincing scams.",
+      "answer": true,
+      "why": "Attackers research targets online to make messages believable. Think about who can see what you post."
+    },
+    {
+      "id": "se-10", "type": "mcq",
+      "q": "A caller says they're from IT and need you to install a remote-access tool to fix an issue you didn't report. What do you do?",
+      "options": ["Install it, IT knows best", "Hang up and contact IT through the official help desk", "Give them your password instead", "Ask them to email you the tool"],
+      "answer": 1,
+      "why": "Unexpected support calls are a common way to get remote control of a computer. Verify through the official channel first."
+    },
+    {
+      "id": "se-11", "type": "tf",
+      "q": "Verifying a request through a second, known channel is a good habit even when the request seems to come from your manager.",
+      "answer": true,
+      "why": "Email accounts get hacked and voices can be cloned. Out-of-band verification is the most reliable defence."
+    }
+  ],
+  "sources": [
+    { "title": "FBI IC3 – 2024 Internet Crime Report", "url": "https://www.ic3.gov/AnnualReport/Reports/2024_IC3Report.pdf" },
+    { "title": "CISA – Avoiding Social Engineering and Phishing Attacks", "url": "https://www.cisa.gov/news-events/news/avoiding-social-engineering-and-phishing-attacks" },
+    { "title": "UK NCSC – Business email compromise: defending your organisation", "url": "https://www.ncsc.gov.uk/guidance/business-email-compromise-defending-your-organisation" }
+  ]
+}

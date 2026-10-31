@@ -1,0 +1,24 @@
+{
+  "name": "open-security-awareness",
+  "version": "2.0.0",
+  "description": "Open-source, animated cyber security, AI security and AI literacy training platform.",
+  "type": "module",
+  "license": "MIT",
+  "engines": { "node": ">=20" },
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node --watch --env-file-if-exists=.env server.js",
+    "db:setup": "node --env-file-if-exists=.env scripts/db-setup.js",
+    "make-admin": "node --env-file-if-exists=.env scripts/make-admin.js",
+    "validate": "node scripts/validate-content.js",
+    "test": "node --env-file-if-exists=.env --test test/*.test.js"
+  },
+  "dependencies": {
+    "express": "^5.1.0",
+    "express-rate-limit": "^8.2.1",
+    "helmet": "^8.1.0",
+    "jose": "^6.1.0",
+    "pg": "^8.16.3",
+    "zod": "^4.1.12"
+  }
+}

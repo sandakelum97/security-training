@@ -1,0 +1,125 @@
+{
+  "slug": "ai-safe-use",
+  "version": 1,
+  "track": "ai-security",
+  "order": 1,
+  "title": "Using AI Tools Safely",
+  "icon": "🤖",
+  "summary": "Get the benefits of chatbots and copilots without leaking data or trusting wrong answers.",
+  "level": "Beginner",
+  "minutes": 7,
+  "lessons": [
+    {
+      "title": "What you type may not stay private",
+      "visual": "📤",
+      "points": [
+        "Text, files and screenshots you give an AI tool are sent to the provider. Depending on the tool and settings, they may be stored, reviewed or used to improve models.",
+        "Consumer accounts and enterprise accounts often have very different data protections.",
+        "Treat a public AI chatbot like a public website: don't paste anything you wouldn't post publicly."
+      ]
+    },
+    {
+      "title": "Never paste these",
+      "visual": "⛔",
+      "points": [
+        "Passwords, API keys, tokens or other secrets.",
+        "Customer or employee personal data, health or financial records.",
+        "Confidential source code, contracts, unreleased plans, or anything labelled Confidential, unless the tool is approved for it."
+      ],
+      "tip": "Use your organisation's approved AI tools. Using unapproved tools for work is called 'shadow AI'."
+    },
+    {
+      "title": "AI can be confidently wrong",
+      "visual": "🌀",
+      "points": [
+        "Large language models can 'hallucinate': produce fluent, convincing answers that are false, including fake citations and code that doesn't work.",
+        "Check facts, numbers, legal or medical statements and sources yourself before relying on them.",
+        "You are responsible for what you send, publish or deploy, even if an AI drafted it."
+      ]
+    },
+    {
+      "title": "AI-written code and agents",
+      "visual": "🧩",
+      "points": [
+        "Review AI-generated code like a stranger's pull request: check for security flaws, secrets and licence issues.",
+        "AI models can suggest packages that don't exist. Attackers register those names with malware, so verify every dependency.",
+        "Give AI agents the least access they need, and require human approval for actions like sending, paying or deleting."
+      ]
+    }
+  ],
+  "questionsPerAttempt": 8,
+  "passMark": 0.75,
+  "questions": [
+    {
+      "id": "as-1", "type": "mcq",
+      "q": "Which of these is safe to paste into a public AI chatbot?",
+      "options": ["A customer spreadsheet", "Your company's API key", "A request to explain what a firewall does", "An unreleased product roadmap"],
+      "answer": 2,
+      "why": "General questions with no sensitive data are fine. Customer data, secrets and confidential plans should never go into unapproved tools."
+    },
+    {
+      "id": "as-2", "type": "tf",
+      "q": "AI chatbots always provide accurate, verified information.",
+      "answer": false,
+      "why": "Models can hallucinate: confident, fluent output that is wrong. Verify important facts and sources."
+    },
+    {
+      "id": "as-3", "type": "mcq",
+      "q": "What is 'shadow AI'?",
+      "options": ["A dark-mode AI theme", "Using AI tools for work that your organisation hasn't approved", "An AI that works at night", "A type of computer virus"],
+      "answer": 1,
+      "why": "Unapproved tools may store or reuse your data in ways your organisation can't control or audit."
+    },
+    {
+      "id": "as-4", "type": "mcq",
+      "q": "An AI assistant suggests installing a code package you've never heard of. What should you do?",
+      "options": ["Install it immediately", "Verify the package exists, is the intended one and is reputable before installing", "Install it on production first", "Ask the AI if it's safe and trust the answer"],
+      "answer": 1,
+      "why": "AI models sometimes invent package names. Attackers publish malware under those names, so always verify dependencies."
+    },
+    {
+      "id": "as-5", "type": "tf",
+      "q": "If an AI drafted an email or report, you are no longer responsible for its accuracy.",
+      "answer": false,
+      "why": "You remain accountable for anything you send or publish. Review AI output before using it."
+    },
+    {
+      "id": "as-6", "type": "mcq",
+      "q": "An AI agent can read your inbox and send email for you. What's the safest setup?",
+      "options": ["Full access with no confirmations", "Least access needed, with your approval before it sends anything", "Share your password with it", "Let it delete emails automatically"],
+      "answer": 1,
+      "why": "Limiting permissions and keeping a human in the loop for high-impact actions reduces damage if the agent is tricked or wrong."
+    },
+    {
+      "id": "as-7", "type": "tf",
+      "q": "Data protections can differ between consumer and enterprise versions of the same AI tool.",
+      "answer": true,
+      "why": "Enterprise plans often include contractual data protections and admin controls that free consumer accounts may not."
+    },
+    {
+      "id": "as-8", "type": "mcq",
+      "q": "An AI tool gives you a statistic with a citation for your report. What should you do?",
+      "options": ["Copy it straight in", "Open the cited source and confirm it says that", "Remove the citation", "Round the number up"],
+      "answer": 1,
+      "why": "AI can fabricate or misquote sources. Always check the original before relying on it."
+    },
+    {
+      "id": "as-9", "type": "mcq",
+      "q": "What should you do with AI-generated code before merging it?",
+      "options": ["Merge it, AI code is always secure", "Review and test it like any other code, including for security issues", "Only check the formatting", "Delete all comments"],
+      "answer": 1,
+      "why": "AI-written code can contain bugs, insecure patterns or secrets. Normal review and testing still apply."
+    },
+    {
+      "id": "as-10", "type": "tf",
+      "q": "Removing names but leaving unique details (job title, location, dates) always makes data anonymous.",
+      "answer": false,
+      "why": "Combinations of details can re-identify people. Follow your organisation's rules and use approved tools for any personal data."
+    }
+  ],
+  "sources": [
+    { "title": "OWASP Top 10 for LLM Applications 2025", "url": "https://genai.owasp.org/llm-top-10/" },
+    { "title": "NIST AI 600-1 – Generative AI Profile", "url": "https://nvlpubs.nist.gov/nistpubs/ai/NIST.AI.600-1.pdf" },
+    { "title": "UK NCSC & partners – Guidelines for secure AI system development", "url": "https://www.ncsc.gov.uk/collection/guidelines-secure-ai-system-development" }
+  ]
+}

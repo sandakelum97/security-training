@@ -1,0 +1,112 @@
+{
+  "slug": "prompting",
+  "version": 1,
+  "track": "ai-basics",
+  "order": 3,
+  "title": "Getting Great Results from AI",
+  "icon": "✨",
+  "summary": "Practical prompting skills: clear asks, good context, and checking the output.",
+  "level": "Beginner",
+  "minutes": 6,
+  "lessons": [
+    {
+      "title": "Be clear and specific",
+      "visual": "🎯",
+      "points": [
+        "Say what you want, who it's for and what 'good' looks like: \"Write a 100-word update for non-technical staff about Friday's system maintenance.\"",
+        "Vague prompts get generic answers. Specific prompts get useful ones.",
+        "Ask for a format: bullet points, a table, a short email, a step-by-step list."
+      ]
+    },
+    {
+      "title": "Give context and examples",
+      "visual": "📎",
+      "points": [
+        "Share relevant background (only what you're allowed to share) so the AI doesn't have to guess.",
+        "Show an example of the style or structure you want. Examples are very effective.",
+        "Break big tasks into steps, and review each step before moving on."
+      ]
+    },
+    {
+      "title": "Iterate",
+      "visual": "🔁",
+      "points": [
+        "Treat the first answer as a draft. Ask for changes: shorter, simpler, more formal, add an example.",
+        "Ask the AI to list its assumptions or what it's unsure about.",
+        "If it goes off track, start a fresh conversation with a better prompt."
+      ]
+    },
+    {
+      "title": "Check before you use",
+      "visual": "🧐",
+      "points": [
+        "Verify facts, figures, quotes and links against trusted sources.",
+        "Check tone and accuracy, especially for anything sent to customers or published.",
+        "Never include confidential data unless the tool is approved for it."
+      ],
+      "tip": "Good prompt + human review = great result."
+    }
+  ],
+  "questionsPerAttempt": 7,
+  "passMark": 0.7,
+  "questions": [
+    {
+      "id": "pr-1", "type": "mcq",
+      "q": "Which prompt is likely to get the most useful result?",
+      "options": ["Write something about security", "Security email", "Write a friendly 120-word email to new staff explaining how to report phishing, with 3 bullet points", "Help"],
+      "answer": 2,
+      "why": "It states the audience, purpose, length, tone and format."
+    },
+    {
+      "id": "pr-2", "type": "tf",
+      "q": "Giving the AI an example of the style you want usually improves the output.",
+      "answer": true,
+      "why": "Examples show the model exactly what you mean, which is often clearer than a description."
+    },
+    {
+      "id": "pr-3", "type": "mcq",
+      "q": "The AI's first draft is too long and too technical. What should you do?",
+      "options": ["Give up on AI", "Ask it to shorten and simplify for your audience", "Use it as-is", "Copy it into a different AI unchanged"],
+      "answer": 1,
+      "why": "Iterating with clear feedback is the fastest way to a good result."
+    },
+    {
+      "id": "pr-4", "type": "tf",
+      "q": "Once you have a good prompt, you can skip checking the facts in the answer.",
+      "answer": false,
+      "why": "Even great prompts can produce errors. Always verify important facts and sources."
+    },
+    {
+      "id": "pr-5", "type": "mcq",
+      "q": "What's a good way to handle a complex task with AI?",
+      "options": ["One giant prompt with everything at once", "Break it into smaller steps and review each one", "Ask it to 'do everything'", "Avoid giving any context"],
+      "answer": 1,
+      "why": "Smaller steps make it easier to guide the AI and catch mistakes early."
+    },
+    {
+      "id": "pr-6", "type": "mcq",
+      "q": "You want the AI's answer as a comparison you can paste into a slide. What should you add to the prompt?",
+      "options": ["Nothing", "Ask for a table with specific columns", "Ask it to be creative", "Use capital letters"],
+      "answer": 1,
+      "why": "Specifying the output format, such as a table with named columns, gives you something ready to use."
+    },
+    {
+      "id": "pr-7", "type": "tf",
+      "q": "Asking the AI to state its assumptions can help you spot mistakes.",
+      "answer": true,
+      "why": "Surfacing assumptions shows you where the answer might not fit your situation."
+    },
+    {
+      "id": "pr-8", "type": "mcq",
+      "q": "Which context is appropriate to share with a public AI tool?",
+      "options": ["Customer names and account numbers", "General description of your goal and audience", "Internal passwords", "Confidential financial results before release"],
+      "answer": 1,
+      "why": "Share the goal and audience, not sensitive data, unless the tool is approved for that data."
+    }
+  ],
+  "sources": [
+    { "title": "Anthropic – Prompt engineering overview", "url": "https://docs.claude.com/en/docs/build-with-claude/prompt-engineering/overview" },
+    { "title": "OpenAI – Prompt engineering guide", "url": "https://platform.openai.com/docs/guides/prompt-engineering" },
+    { "title": "NIST AI 600-1 – Generative AI Profile", "url": "https://nvlpubs.nist.gov/nistpubs/ai/NIST.AI.600-1.pdf" }
+  ]
+}
